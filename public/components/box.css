@@ -1,0 +1,146 @@
+img{
+    width: 50%;
+    height: 100%;
+}
+button{
+        display: inline;
+        border: none;
+        background: none;
+        color: rgba(255, 0, 0, 0.75);
+}
+
+.wrapper{
+    width: 90%;
+    margin: 0 auto
+}
+.col{
+   
+    margin-bottom: 10px;
+}
+a{
+    text-decoration: none !important;
+    color: black !important;
+}
+
+.box{
+    width: 270px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow:rgba(64, 62, 62, 0.68) 1px 3px 9px 2px
+    
+}
+
+.info a p:first-child{
+    text-align: center;
+    font-weight: 800;
+    font-family: sans-serif;
+    margin-top: 10px;
+  
+}
+
+.info p:last-child{
+    text-align: justify;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+
+}
+
+@media only screen and (max-width: 1230px){
+    
+     .wrapper{
+         width: 100%
+     }
+     .box{
+         width: 268px
+     }
+     
+ }
+ @media only screen and (max-width: 1170px){
+    
+    .wrapper{
+        width: 100%
+    }
+    .box{
+        width: 245px;
+        
+    }
+    
+}
+ @media only screen and (max-width: 880px){
+ 
+     .wrapper{
+         width: 100%
+     }
+     .box{
+        width: 225px;
+ text-align: center !important;
+     }
+     
+ }
+ @media only screen and (max-width: 740px){
+   
+     .wrapper{
+         width: 100%
+     }
+     .box{
+        width: 272px;
+ text-align: center !important;
+     }
+     
+ }
+
+ @media only screen and (max-width: 590px){
+   
+    .wrapper{
+        width: 100%
+    }
+    .box{
+       width: 244px;
+text-align: center !important;
+    }
+    
+}
+ @media only screen and (max-width: 540px){
+   
+    .wrapper{
+        width: 100%
+    }
+    .box{
+       width: 236px;
+text-align: center !important;
+    }
+    
+}
+
+@media only screen and (max-width: 520px){
+    .wrapper{
+        width: 100%
+    }
+    .box{
+        width: 233px;
+ text-align: center !important;
+     }
+}
+
+@media only screen and (max-width: 500px){
+    .wrapper{
+        width: 100%
+    }
+    .box{
+        width: 400px;
+ text-align: center !important;
+     }
+}
+@media only screen and (max-width: 400px){
+    .wrapper{
+        width: 100%
+    }
+    .box{
+        width: 373px;
+        text-align: center !important;
+     }
+     img{
+         width: 40%
+     }
+}
+
