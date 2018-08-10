@@ -9,15 +9,13 @@ class Master extends React.Component{
         this.state={
             games:[],
             filters:[],
-            flag:false,
-            currentFilter:null
+            category:null
         }
         this.getGames=this.getGames.bind(this)
         this.searchByName=this.searchByName.bind(this)
         this.setFilter=this.setFilter.bind(this)
         this.setTag=this.setTag.bind(this)
         this.gameList=[]
-        this.filt=[]
         this.filter=this.state.filters
     }
     getGames(){
@@ -35,6 +33,7 @@ class Master extends React.Component{
         .then(result=>{
             this.setState((prev)=>{
                 this.gameList=result.games
+                this.setFilter()
                 return {games:prev.games.concat(this.gameList)}
         })
         })
@@ -50,47 +49,31 @@ class Master extends React.Component{
         this.setState({games:d})
     }
     setFilter(event){
-        let filter=event.target.value
         let toFind=[]
         this.gameList.forEach(x=>{
-            x[filter].forEach(y=>{
+            x["categories"].forEach(y=>{
 				if(!toFind.includes(y)){
 						toFind.push(y)
                 }
             })
         })
-        this.setState({filters:[...toFind],currentFilter:filter})
+        this.setState({filters:[...toFind]})
     }
     setTag(event){
-        let tag=event.target.checked
-        let val=event.target.value
-        if(tag){
-            this.filt.push(val)
-        }
-        else{
-            var index = this.filt.indexOf(val);
-            if (index > -1) {
-                this.filt.splice(index, 1);
-            }
-        }
-        var zz=this.gameList.filter(x=>{
-            let d=x[this.state.currentFilter].filter(f => this.filt.includes(f))
-             if(d.length>0){
-                 return x
-             }
-         })
-        if(zz.length>0){
-            this.setState({games:zz})
-        }
-        else{
-            this.setState({games:[]})
-            this.getGames()
-        }
-       
+        let tag=event.target.value
+  
+            var data=this.gameList.filter(x=>{
+                if(x["categories"].includes(tag)){
+                    return true
+                }
+            })
+            this.setState({games:data})
+      
     }
    
     componentWillMount(){
         this.getGames()
+        
     }
     render(){
         return(
@@ -103,23 +86,13 @@ class Master extends React.Component{
                         <input type="text" className="form-control" onChange={this.searchByName} placeholder="Search for..." />
                     </div>
                 </div>
-                <button type="button"  onClick={this.setFilter} value="categories" className="btn btn-primary">Search By Category</button>
-                <button type="button"  onClick={this.setFilter} value="tags" className="btn btn-primary">Search By Tags</button>
-                    <div className={`panel panel-default`}>
-                       {this.state.filters.map(x=>{
-                           return (
-                               <span  key={x} className="badge">
-                               <label>
-                                <input type="checkbox" className="btn-outline-secondary" value={x} onClick={this.setTag}/>
-                                {x}
-                                </label>
-                           </span>
-                           )
-                       })}
-                    </div>
-                    <div className="row">
-                        {this.state.games.map(x=><Box key={x.code} data={x}/>)}
-                    </div>
+                <select  onChange={this.setTag}  >
+                   <option value={"All"}>Select categories</option>
+                   {this.state.filters.map(x=><option  value={x} key={x}> {x}</option>)} 
+                </select>
+                <div className="row">
+                    {this.state.games.map(x=><Box key={x.code} data={x}/>)}
+                </div>
                 </div>
         )
     }
