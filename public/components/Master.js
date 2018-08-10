@@ -15,6 +15,7 @@ class Master extends React.Component{
         this.searchByName=this.searchByName.bind(this)
         this.setFilter=this.setFilter.bind(this)
         this.setTag=this.setTag.bind(this)
+        this.reseter=this.reseter.bind(this)
         this.gameList=[]
         this.filter=this.state.filters
     }
@@ -60,8 +61,8 @@ class Master extends React.Component{
         this.setState({filters:[...toFind]})
     }
     setTag(event){
+        console.log("settag")
         let tag=event.target.value
-  
             var data=this.gameList.filter(x=>{
                 if(x["categories"].includes(tag)){
                     return true
@@ -70,7 +71,10 @@ class Master extends React.Component{
             this.setState({games:data})
       
     }
-   
+    reseter(){
+        console.log("done")
+        this.setState((prev)=>({games:prev.games}))
+    }
     componentWillMount(){
         this.getGames()
         
@@ -90,6 +94,7 @@ class Master extends React.Component{
                    <option value={"All"}>Select categories</option>
                    {this.state.filters.map(x=><option  value={x} key={x}> {x}</option>)} 
                 </select>
+                <button onClick={this.reseter}>Reset</button>
                 <div className="row">
                     {this.state.games.map(x=><Box key={x.code} data={x}/>)}
                 </div>
