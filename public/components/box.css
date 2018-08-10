@@ -8,7 +8,18 @@ button{
         background: none;
         color: rgba(255, 0, 0, 0.75);
 }
-
+.badge{
+    display: inline-block;
+    cursor: pointer;
+}
+.tags{
+    
+    background: rgba(83, 166, 170, 0.62);
+    
+}
+.noTags{
+    background: black;
+}
 .wrapper{
     width: 90%;
     margin: 0 auto
