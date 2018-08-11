@@ -2,7 +2,6 @@ import React from 'react'
 import Box from './Box'
 require('../../node_modules/bootstrap/dist/css/bootstrap.min.css')
 require('./box.css');
-
 class Master extends React.Component{
     constructor(props){
         super(props)
@@ -32,10 +31,10 @@ class Master extends React.Component{
         })
         .then(res=>res.json())
         .then(result=>{
-            this.setState((prev)=>{
+            this.setState(()=>{
                 this.gameList=result.games
                 this.setFilter()
-                return {games:prev.games.concat(this.gameList)}
+                return {games:this.gameList}
         })
         })
         .catch(x=>console.log(x))
@@ -69,35 +68,41 @@ class Master extends React.Component{
                 }
             })
             this.setState({games:data})
-      
     }
     reseter(){
-        console.log("done")
-        this.setState((prev)=>({games:prev.games}))
+        this.setState({games:this.gameList})
     }
     componentWillMount(){
         this.getGames()
-        
     }
     render(){
         return(
                 <div className="wrapper">
+                <div className={`controllers jumbotron jumbotron-fluid`} >
                     <div className="col-lg-6">
                         <div className="input-group">
                             <span className="input-group-btn">
-                                <button className={`btn btn-default`} type="button" >Search By Name</button>
+                                <button className={`btn controller-button`} type="button" >Search By Name</button>
                             </span>
                         <input type="text" className="form-control" onChange={this.searchByName} placeholder="Search for..." />
                     </div>
                 </div>
-                <select  onChange={this.setTag}  >
-                   <option value={"All"}>Select categories</option>
-                   {this.state.filters.map(x=><option  value={x} key={x}> {x}</option>)} 
-                </select>
-                <button onClick={this.reseter}>Reset</button>
-                <div className="row">
-                    {this.state.games.map(x=><Box key={x.code} data={x}/>)}
+                <div className="col-lg-6">
+                        <div className="input-group">
+                            <span className="input-group-btn">
+                                <button className={`btn controller-button`} type="button" >Search By Categories</button>
+                            </span>
+                            <select  className={`  dropdown-toggle`} onChange={this.setTag}>
+                                <option value={"All"}>Select categories</option>
+                                {this.state.filters.map(x=><option  value={x} key={x}> {x}</option>)} 
+                            </select>
+                         <button className={` btn controller-button reseter`} onClick={this.reseter}>Reset</button>
+                    </div>
                 </div>
+                </div>
+                    <div className="row">
+                        {this.state.games.map(x=><Box key={x.code} data={x}/>)}
+                    </div>
                 </div>
         )
     }
